@@ -123,15 +123,18 @@ const firebaseConfig = {
   appId: "1:512623024404:web:767c0b15e18da335718a01"
 };
 const MATHAI_ADMIN_UID='4uiN3wQIE4WoSWnd6bJ0Gdow6qq1';
-let mathAIAuth=null, mathAIDb=null, mathAICloudReady=false;
+let mathAIAuth=null, mathAIDb=null, mathAIAdminApp=null, mathAIAdminAuth=null, mathAIAdminDb=null, mathAICloudReady=false;
 try {
-  if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-  mathAIAuth=firebase.auth(); mathAIDb=firebase.firestore();
+  // Оқушы мен админнің Firebase сессиялары бөлек болады.
+  const defaultApp = firebase.apps.find(app=>app.name==='[DEFAULT]') || firebase.initializeApp(firebaseConfig);
+  mathAIAuth=defaultApp.auth(); mathAIDb=defaultApp.firestore();
+  mathAIAdminApp = firebase.apps.find(app=>app.name==='mathAIAdmin') || firebase.initializeApp(firebaseConfig,'mathAIAdmin');
+  mathAIAdminAuth=mathAIAdminApp.auth(); mathAIAdminDb=mathAIAdminApp.firestore();
 } catch(e) { console.error('Firebase іске қосылмады:',e); }
 const mathAIWait=ms=>new Promise(r=>setTimeout(r,ms));
 async function mathAIEnsureStudentAuth(){
   if(!mathAIAuth) throw new Error('Firebase SDK жүктелмеді. Интернет байланысын тексеріңіз.');
-  if(mathAIAuth.currentUser && !mathAIAuth.currentUser.isAnonymous) await mathAIAuth.signOut();
+  // Админ кіргенде оқушының жасырын аккаунтын өшірмейміз.
   if(!mathAIAuth.currentUser) await mathAIAuth.signInAnonymously();
   return mathAIAuth.currentUser;
 }
@@ -147,27 +150,29 @@ async function mathAISaveStudent(key,student){
   await mathAIDb.collection('students').doc(id).set({...student,ownerUid:user.uid,studentKey:id,localStudentKey:key,updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
 }
 async function mathAILoadAllStudents(){
-  const snap=await mathAIDb.collection('students').get();
+  if(!mathAIAdminDb || !mathAIAdminAuth?.currentUser || mathAIAdminAuth.currentUser.uid!==MATHAI_ADMIN_UID) throw new Error('Админ аккаунтына кіріңіз.');
+  const snap=await mathAIAdminDb.collection('students').get();
   const db=loadDB(); db.students=db.students||{};
   snap.forEach(doc=>{const x=doc.data(); if(x && x.studentKey && x.name){const copy={...x};delete copy.ownerUid;delete copy.studentKey;delete copy.localStudentKey;delete copy.updatedAt;db.students[x.studentKey]=copy;}});
   localStorage.setItem(DBKEY,JSON.stringify(db));
 }
 async function mathAILoadContent(){
-  const snap=await mathAIDb.collection('appContent').doc('library').get();
+  const db = (mathAIAdminAuth?.currentUser?.uid===MATHAI_ADMIN_UID) ? mathAIAdminDb : mathAIDb;
+  const snap=await db.collection('appContent').doc('library').get();
   if(snap.exists){const x=snap.data();localStorage.setItem(CONTENTKEY,JSON.stringify({videos:x.videos||[],tasks:x.tasks||[]}));}
 }
 async function mathAISaveContent(){
-  if(!mathAIAuth || !mathAIAuth.currentUser || mathAIAuth.currentUser.uid!==MATHAI_ADMIN_UID) return;
+  if(!mathAIAdminAuth || !mathAIAdminAuth.currentUser || mathAIAdminAuth.currentUser.uid!==MATHAI_ADMIN_UID) return;
   const lib=loadContent();
-  await mathAIDb.collection('appContent').doc('library').set({videos:lib.videos||[],tasks:lib.tasks||[],updatedAt:firebase.firestore.FieldValue.serverTimestamp()});
+  await mathAIAdminDb.collection('appContent').doc('library').set({videos:lib.videos||[],tasks:lib.tasks||[],updatedAt:firebase.firestore.FieldValue.serverTimestamp()});
 }
 async function mathAITeacherSignIn(email,password){
-  const cred=await mathAIAuth.signInWithEmailAndPassword(email,password);
-  if(cred.user.uid!==MATHAI_ADMIN_UID){await mathAIAuth.signOut();throw new Error('Бұл аккаунтқа админ кабинеті рұқсаты берілмеген.');}
+  const cred=await mathAIAdminAuth.signInWithEmailAndPassword(email,password);
+  if(cred.user.uid!==MATHAI_ADMIN_UID){await mathAIAdminAuth.signOut();throw new Error('Бұл аккаунтқа админ кабинеті рұқсаты берілмеген.');}
   await mathAILoadAllStudents(); await mathAILoadContent();
 }
 async function mathAIRefreshTeacher(){
-  if(!mathAIAuth?.currentUser || mathAIAuth.currentUser.uid!==MATHAI_ADMIN_UID) throw new Error('Админ аккаунтына кіріңіз.');
+  if(!mathAIAdminAuth?.currentUser || mathAIAdminAuth.currentUser.uid!==MATHAI_ADMIN_UID) throw new Error('Админ аккаунтына кіріңіз.');
   await mathAILoadAllStudents(); await mathAILoadContent();
 }
 const DBKEY='mathai_fraction_research_v1';
