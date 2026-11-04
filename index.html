@@ -22,6 +22,216 @@
 .teacher-lock-card{background:#fff;border-radius:22px;padding:26px;max-width:440px;width:100%;box-shadow:0 25px 80px #08152b55}
 .teacher-lock-card h2{margin-bottom:8px}.teacher-lock-card input{width:100%;padding:13px;border:1px solid #d6dfec;border-radius:12px;margin:10px 0 14px}
 
+
+/* MathAI Premium EdTech redesign — visual layer only; application logic is unchanged */
+:root{
+ --blue:#5865e8;--sky:#edf0ff;--purple:#8b5cf6;--lav:#f1eaff;
+ --green:#10b981;--mint:#e6fbf3;--orange:#f59e0b;--peach:#fff5e5;
+ --ink:#172044;--muted:#737b98;--line:#e7e9f5;--white:#fff;--red:#e45b72;
+ --shadow:0 18px 55px rgba(53,54,120,.10);
+}
+html{scroll-behavior:smooth}
+body{
+ background:radial-gradient(ellipse at 8% 4%,rgba(129,140,248,.18),transparent 30%),
+ radial-gradient(ellipse at 94% 12%,rgba(216,180,254,.19),transparent 28%),
+ linear-gradient(145deg,#f8f9ff 0%,#f5f7ff 48%,#fffaff 100%);
+ color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif;letter-spacing:-.01em;
+}
+.app{max-width:1320px;padding:24px clamp(14px,3vw,34px)}
+.topbar{position:relative;padding:15px 18px;border:1px solid rgba(255,255,255,.82);border-radius:24px;background:rgba(255,255,255,.76);backdrop-filter:blur(18px);box-shadow:0 8px 35px rgba(57,64,130,.07);margin-bottom:25px}
+.brand{gap:14px}.logo{width:54px;height:54px;border-radius:18px;background:linear-gradient(145deg,#5865e8,#a855f7 78%);box-shadow:0 9px 22px rgba(104,89,225,.28);font-weight:800}
+.brand h1{font-size:1.35rem;letter-spacing:-.045em;color:#252b58}.brand h1 .muted{color:#74799c!important}.brand p{font-size:.84rem;color:#858aa5}
+.tag{background:#f6f7ff;border-color:#e8e9f7;color:#62698b;font-weight:650}
+.panel,.card{background:rgba(255,255,255,.88);border:1px solid rgba(224,226,246,.9);border-radius:24px;box-shadow:var(--shadow);backdrop-filter:blur(12px)}
+.login{max-width:590px;margin:6vh auto;padding:clamp(18px,3vw,30px);border-radius:30px;box-shadow:0 28px 80px rgba(58,58,130,.13)}
+.hero{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(125deg,#343b91 0%,#6256c9 48%,#9863d9 100%);border-radius:24px;padding:clamp(22px,4vw,34px);margin-bottom:22px;color:#fff;box-shadow:0 16px 34px rgba(87,76,190,.2)}
+.hero:before,.hero:after{content:"";position:absolute;z-index:-1;border-radius:50%;pointer-events:none}
+.hero:before{width:230px;height:230px;right:-65px;top:-105px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16)}
+.hero:after{width:145px;height:145px;right:80px;bottom:-105px;background:rgba(255,255,255,.09)}
+.hero h2{font-size:clamp(1.55rem,3vw,2.3rem);line-height:1.13;letter-spacing:-.045em;max-width:720px;color:#fff}
+.hero p{color:rgba(255,255,255,.82);max-width:650px}
+.hero .muted{color:rgba(255,255,255,.78)}
+.field{gap:8px;margin:16px 0}.field label{color:#3d456d;font-size:.9rem}
+.field input,.field select,.field textarea,#teacherSearch{border:1px solid #e2e5f5!important;border-radius:14px!important;padding:13px 15px!important;background:#fbfbff!important;color:#252b50;transition:border-color .2s,box-shadow .2s,background .2s}
+.field input:focus,.field select:focus,.field textarea:focus,#teacherSearch:focus{border-color:#8b7cf6!important;background:#fff!important;box-shadow:0 0 0 4px rgba(139,124,246,.13)!important}
+button{border-radius:14px;font-weight:750;letter-spacing:-.01em;transition:transform .2s,box-shadow .2s,filter .2s}
+button:hover{transform:translateY(-2px);filter:none;box-shadow:0 8px 18px rgba(73,75,150,.12)}
+.primary{background:linear-gradient(110deg,#5965e8,#875be7);color:#fff;box-shadow:0 8px 18px rgba(91,96,220,.2)}
+.secondary{background:#edf0ff;color:#4c56bd}.purple{background:#f1eaff;color:#7545bd}.green{background:#e5faf1;color:#087c5a}.orange{background:#fff3df;color:#a96808}.plain{background:#f3f4fb;color:#555d7e}.danger{background:#fff0f2;color:#b43f59}
+.nav{gap:9px;flex-wrap:nowrap;overflow-x:auto;padding:7px;margin:18px 0 24px;border:1px solid rgba(225,227,246,.9);border-radius:19px;background:rgba(255,255,255,.72);box-shadow:0 8px 24px rgba(62,67,130,.06);scrollbar-width:thin}
+.nav button{flex:0 0 auto;background:transparent;color:#687092;border:1px solid transparent;border-radius:12px;padding:10px 14px}
+.nav button.active{background:linear-gradient(110deg,#5965e8,#815ee2);color:#fff;border-color:transparent;box-shadow:0 7px 16px rgba(91,96,220,.2)}
+.grid{gap:18px}.stat{background:linear-gradient(145deg,#fafaff,#f2f4ff);border:1px solid #e8e9fa;border-radius:20px;padding:20px}.stat strong{color:#4e56c8;font-size:1.85rem;letter-spacing:-.04em}
+.topic-card{border:1px solid rgba(255,255,255,.85);border-radius:24px;padding:22px;min-height:220px;box-shadow:0 12px 30px rgba(72,79,145,.08);transition:transform .22s,box-shadow .22s}
+.topic-card:hover,.game-tile:hover{transform:translateY(-4px);box-shadow:0 18px 38px rgba(72,79,145,.13)}
+.topic-card.blue{background:linear-gradient(145deg,#e9efff,#f8f9ff 78%)}.topic-card.pink{background:linear-gradient(145deg,#f5eaff,#fff9ff 78%)}
+.topic-card .emoji{display:grid;place-items:center;width:58px;height:58px;border-radius:19px;background:rgba(255,255,255,.78);box-shadow:0 7px 18px rgba(75,74,140,.08);font-size:2rem}
+.topic-card h3{color:#303762;letter-spacing:-.025em}.topic-card p{line-height:1.55}
+.pill{background:#e9edff;color:#4c59c5}.pill.purple{background:#f0e7ff;color:#854fc4}.pill.green{background:#e3f9ef;color:#087c5a}.pill.orange{background:#fff1da;color:#a66b13}
+.section-head h2{color:#252d5a;letter-spacing:-.035em}.section-head p{color:#7c83a0}
+.question-box,.explain,.report-box{border-radius:19px;border-color:#e8eafa;background:linear-gradient(145deg,#fcfcff,#f7f8ff)}
+.answer-option{border:1.5px solid #e5e7f5;border-radius:15px;background:#fff;transition:all .18s}.answer-option:hover{border-color:#9b91f3;background:#faf9ff}.answer-option.selected{border-color:#7475eb;background:#f0f0ff}.answer-option.correct{border-color:#35b98b;background:#e9fbf3}.answer-option.wrong{border-color:#ec8294;background:#fff1f3}
+.progress{height:10px;background:#eceef8;border-radius:20px}.progress span{background:linear-gradient(90deg,#5965e8,#ad68e7);border-radius:20px}
+.feedback{border-radius:16px}.feedback.good{background:#e7faf1;color:#087654}.feedback.hint{background:#fff5e4;color:#93600e}.feedback.bad{background:#fff0f2;color:#a63f58}
+.game-tile{border:1px solid #e8e9f7;border-radius:22px;padding:20px;background:linear-gradient(145deg,#fff,#fafaff);box-shadow:0 8px 22px rgba(72,79,145,.05);transition:transform .22s,box-shadow .22s}
+.food-visual-wrap{border-color:#e7e8f7;border-radius:22px;background:linear-gradient(135deg,#f2f4ff,#fff8fc)}
+th{background:#f1f2ff;color:#565d91}td{border-bottom-color:#eceefa}tr:hover td{background:#fafaff}
+.note{background:#fff8e9;border-color:#f5e5bb;color:#805a1c;border-radius:15px}
+.modal{border:1px solid #ecebfa;border-radius:24px;box-shadow:0 25px 80px rgba(24,28,70,.22)}
+.teacher-lock-card{border:1px solid #ecebfa;border-radius:25px}
+.footer{color:#969bb3;padding:32px 0 18px}
+@media(max-width:800px){.app{padding:12px}.topbar{padding:13px;border-radius:19px}.nav{margin:14px -2px 20px}.nav button{padding:9px 12px;font-size:.84rem}.login{margin:3vh auto}.hero{border-radius:20px}.panel,.card{border-radius:20px}}
+@media(max-width:520px){.brand h1{font-size:1.05rem}.brand p{font-size:.76rem}.logo{width:46px;height:46px}.topbar>.row{width:100%}.topbar>.row button{flex:1}.topic-card{min-height:0}.hero{padding:21px}.login{padding:14px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+
+/* Premium analytics dashboard */
+#teacherView .hero{position:relative;overflow:hidden;background:linear-gradient(115deg,#222a78 0%,#5144bd 48%,#a65bd2 100%);color:#fff;border:0;box-shadow:0 18px 45px #5545b833;padding:30px 34px}
+#teacherView .hero:after{content:"½";position:absolute;right:5%;top:-42px;font-size:190px;font-weight:900;color:#ffffff13;transform:rotate(12deg);pointer-events:none}
+#teacherView .hero h2{font-size:clamp(1.6rem,3vw,2.35rem);letter-spacing:-.04em}
+#teacherView .hero p{color:#e9e7ff;max-width:620px;margin-bottom:0}
+#teacherView .note{border:1px solid #d9d5ff;background:linear-gradient(100deg,#f1efff,#eef8ff);color:#4f4a83}
+#teacherStats{gap:14px}
+.dash-kpi{position:relative;isolation:isolate;overflow:hidden;min-height:150px;padding:20px;border-radius:22px;color:#fff;box-shadow:0 12px 28px #29375b18}
+.kpi-violet{background:linear-gradient(135deg,#6154d9,#a46de8)}.kpi-blue{background:linear-gradient(135deg,#238bdc,#52c2ed)}.kpi-pink{background:linear-gradient(135deg,#e65c9c,#f49abd)}.kpi-mint{background:linear-gradient(135deg,#12a88d,#55c9a5)}
+.kpi-top{display:flex;align-items:center;gap:10px;position:relative;z-index:1}.kpi-icon{width:38px;height:38px;border-radius:13px;background:#ffffff27;display:grid;place-items:center;font-size:20px}.kpi-label{font-size:.9rem;font-weight:700;color:#ffffffdf}
+.kpi-value{font-size:2.45rem;font-weight:850;line-height:1.1;margin:14px 0 5px;letter-spacing:-.04em;position:relative;z-index:1}.kpi-sub{font-size:.78rem;color:#ffffffd9;position:relative;z-index:1}.kpi-orb{position:absolute;width:130px;height:130px;border-radius:50%;background:#ffffff12;right:-30px;bottom:-65px;z-index:-1}
+#teacherView .panel{border:1px solid #e7e8f4;box-shadow:0 10px 35px #26345b0b}#teacherView .panel h3{font-size:1.12rem;letter-spacing:-.02em}#teacherView .section-head{align-items:center}
+#teacherView #teacherTable{border-radius:17px}.results-table{min-width:900px;border-collapse:separate;border-spacing:0}.results-table th{background:#f2f3ff;color:#5e5b83;font-weight:800;padding:14px 12px}.results-table th:first-child{border-radius:12px 0 0 0}.results-table th:last-child{border-radius:0 12px 0 0}.results-table td{padding:15px 12px;border-bottom:1px solid #edf0f7;background:#fff}.results-table tr:hover td{background:#fafaff}
+.row-number{width:27px;height:27px;display:inline-grid;place-items:center;border-radius:9px;background:#efedff;color:#6c5bd5;font-weight:800}.student-name{color:#283252}
+.class-chip,.score-chip,.gain-chip{display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 9px;font-size:.78rem;font-weight:750;white-space:nowrap}.class-chip{background:#f1f5fb;color:#64718a}.score-blue{background:#eaf5ff;color:#247ac4}.score-violet{background:#f0edff;color:#725bd4}.gain-chip{padding:6px 10px}.gain-up{background:#e4f9f0;color:#128260}.gain-down{background:#fff0ed;color:#d65e4b}.status-muted{color:#a0a8b8;font-size:.8rem}
+.error-count{display:inline-grid;place-items:center;min-width:28px;height:28px;padding:0 8px;border-radius:9px;font-weight:850}.count-orange{background:#fff1e4;color:#d47b28}.count-pink{background:#ffedf5;color:#d65b91}.detail-btn{background:#efedff;color:#6554c9;padding:8px 11px;border-radius:10px;font-size:.78rem}
+#teacherView .grid>.col6.panel{min-width:0}.chart-caption{display:flex;justify-content:space-between;align-items:center;color:#68728b;font-size:.82rem;margin:4px 0 18px}.chart-caption b{background:#f1efff;color:#725bd4;border-radius:99px;padding:6px 10px}
+.error-line{margin:15px 0}.error-line-head{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.85rem;margin-bottom:7px;color:#4d5872}.error-line-head span{display:flex;align-items:center;gap:9px}.error-line-head i{width:10px;height:10px;border-radius:50%;display:inline-block;box-shadow:0 0 0 4px #f4f5fa}
+.error-track,.comparison-track{height:11px;background:#f0f1f7;border-radius:99px;overflow:hidden}.error-track span,.comparison-track span{display:block;height:100%;border-radius:99px;transition:width .6s ease}.chart-empty{padding:35px 15px;text-align:center;color:#8a94a9;background:#fafbff;border-radius:16px;font-size:.9rem}
+.score-overview{display:flex;justify-content:space-evenly;align-items:center;gap:18px;padding:10px 0 18px}.score-donut{width:132px;height:132px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#39a8e9 calc(var(--score)*1%),#eaf2fb 0);position:relative}.score-donut:before{content:"";position:absolute;inset:11px;border-radius:50%;background:#fff}.score-donut>div{position:relative;display:flex;flex-direction:column;align-items:center}.score-donut strong{font-size:1.7rem;color:#2988c9;letter-spacing:-.04em}.score-donut small{font-size:.72rem;color:#8a94a9}.score-donut.donut-purple{background:conic-gradient(#8b68e8 calc(var(--score)*1%),#f0edfb 0)}.score-donut.donut-purple strong{color:#8061d7}
+.score-legend{display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center;padding:13px 14px;background:#fafaff;border-radius:14px;font-size:.82rem;color:#67728a}.score-legend span{display:flex;align-items:center;gap:8px}.score-legend b{color:#303b5a}.score-legend i{width:9px;height:9px;border-radius:50%;display:inline-block}.legend-blue{background:#39a8e9}.legend-purple{background:#8b68e8}
+.comparison-bars{display:grid;gap:14px;margin-top:18px}.comparison-head{display:flex;justify-content:space-between;font-size:.8rem;color:#65708a;margin-bottom:7px}.comparison-head b{color:#35415f}.fill-blue{background:linear-gradient(90deg,#37a5e7,#71c9f2)}.fill-purple{background:linear-gradient(90deg,#8162df,#bd8bf0)}.chart-footnote{font-size:.72rem;color:#9aa2b3;margin:14px 0 0;line-height:1.5}
+@media(max-width:800px){#teacherStats .col3{grid-column:span 6}.dash-kpi{min-height:135px;padding:16px}.kpi-value{font-size:2rem}.score-donut{width:112px;height:112px}}
+@media(max-width:520px){#teacherStats .col3{grid-column:span 12}.score-overview{gap:10px}.score-donut{width:104px;height:104px}}
+
+
+/* Student learning history: colorful premium cards */
+.student-detail-panel{background:linear-gradient(145deg,#fff 0%,#fbfaff 100%)}
+.detail-eyebrow{display:block;color:#8976d9;font-size:.68rem;font-weight:900;letter-spacing:.13em;margin-bottom:6px}
+.student-detail-panel .section-head h3{font-size:1.35rem;margin-bottom:2px}
+.detail-diagnostics{margin-top:8px}
+.diagnostic-mini{min-height:150px;padding:19px;border-radius:20px;display:flex;flex-direction:column;gap:5px;position:relative;overflow:hidden}
+.diagnostic-mini>span{font-size:.82rem;font-weight:800;opacity:.85}
+.diagnostic-mini strong{font-size:2.2rem;line-height:1.1;letter-spacing:-.04em}
+.diagnostic-mini>b{font-size:.95rem}
+.diagnostic-mini small{font-size:.72rem;opacity:.75}
+.diagnostic-blue{background:linear-gradient(135deg,#e5f4ff,#d9eaff);color:#286db0}
+.diagnostic-purple{background:linear-gradient(135deg,#f0eaff,#e7e1ff);color:#7056c7}
+.topic-progress-card{padding:18px;border-radius:19px;position:relative;min-height:172px;border:1px solid transparent}
+.topic-peach{background:linear-gradient(135deg,#fff3e7,#fff9f2);border-color:#ffead7}
+.topic-lilac{background:linear-gradient(135deg,#f0edff,#faf8ff);border-color:#e8e1ff}
+.topic-mini-icon{font-size:1.35rem;float:right}
+.topic-progress-title{font-weight:850;color:#414b66;font-size:.9rem;max-width:85%}
+.topic-progress-number{font-size:1.8rem;font-weight:900;color:#6258bd;margin-top:9px}
+.topic-progress-caption,.topic-progress-repeat{display:block;font-size:.73rem;color:#818ba0}
+.detail-progress{height:8px;border-radius:99px;background:#fff;overflow:hidden;margin:10px 0}
+.detail-progress span{height:100%;display:block;border-radius:99px;background:linear-gradient(90deg,#ffad70,#ef7e91)}
+.topic-lilac .detail-progress span{background:linear-gradient(90deg,#8d75ed,#b38af2)}
+.detail-section-card{background:#fff;border:1px solid #e9e8f4;border-radius:20px;padding:20px;box-shadow:0 8px 25px #30385a08}
+.detail-section-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:15px}
+.detail-section-heading h4{font-size:1.05rem;margin:0 0 5px;color:#303a59}
+.detail-section-heading p{margin:4px 0 0}
+.detail-section-tag{background:#f0edff;color:#755fd0;border-radius:99px;padding:7px 11px;font-size:.7rem;font-weight:850;white-space:nowrap}
+.detail-error-row{margin:14px 0}
+.detail-error-head{display:flex;justify-content:space-between;gap:12px;font-size:.82rem;color:#5d6880;margin-bottom:7px}
+.detail-error-head span{display:flex;align-items:center;gap:8px}
+.detail-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.dot-0{background:#8165e8}.dot-1{background:#35a5e4}.dot-2{background:#f29b55}.dot-3{background:#e66ca7}.dot-4{background:#29b89a}
+.detail-error-track{height:10px;background:#f0f1f7;border-radius:99px;overflow:hidden}
+.detail-error-track span{height:100%;display:block;border-radius:99px;background:linear-gradient(90deg,#8065e8,#48a8e5)}
+.detail-empty{padding:22px;text-align:center;background:#fafaff;border-radius:14px;color:#8791a6;font-size:.85rem}
+.practice-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:15px 0 20px}
+.practice-summary>div{background:#f6f5ff;border:1px solid #eeebff;border-radius:14px;padding:12px;text-align:center}
+.practice-summary>div:nth-child(2){background:#fff4ed;border-color:#ffeadc}
+.practice-summary>div:nth-child(3){background:#eef8ff;border-color:#e1f0ff}
+.practice-summary>div:nth-child(4){background:#eaf9f1;border-color:#dcf3e7}
+.practice-summary b{display:block;font-size:1.35rem;color:#554c9e}
+.practice-summary span{font-size:.69rem;color:#7b8498;display:block;margin-top:3px}
+.practice-run-card{border:1px solid #e9eaf4;border-radius:18px;padding:17px;margin:13px 0;background:linear-gradient(145deg,#fff,#fcfcff)}
+.practice-run-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.run-index{font-size:.62rem;font-weight:900;letter-spacing:.12em;color:#8b78d9}
+.practice-run-head h5{font-size:1rem;margin:4px 0;color:#35405f}
+.run-date{font-size:.7rem;color:#98a1b1}
+.run-score{text-align:right;background:#f0edff;color:#7059c7;border-radius:13px;padding:9px 12px;white-space:nowrap}
+.run-score strong{display:block;font-size:1.2rem}
+.run-score span{font-size:.66rem}
+.run-progress{height:8px;background:#f0f1f7;border-radius:99px;overflow:hidden;margin:13px 0}
+.run-progress span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#8065e8,#39a7e5)}
+.run-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:14px}
+.run-metrics>div{background:#f7f8fc;border-radius:11px;padding:9px;text-align:center}
+.run-metrics b{display:block;font-size:1rem;color:#424d6c}
+.run-metrics span{font-size:.63rem;color:#8992a5;display:block}
+.practice-task-list{display:grid;gap:9px}
+.practice-task{border:1px solid #e9edf4;border-left:4px solid #aab3c4;border-radius:13px;padding:12px 13px;background:#fff}
+.practice-task.task-fixed{border-left-color:#20ae79;background:linear-gradient(90deg,#f0fbf5,#fff 55%)}
+.practice-task.task-wrong{border-left-color:#e87979;background:linear-gradient(90deg,#fff3f2,#fff 55%)}
+.practice-task.task-correct{border-left-color:#42a8df;background:linear-gradient(90deg,#f1f9ff,#fff 55%)}
+.practice-task.task-pending{border-left-color:#b9a5e8}
+.practice-task-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.practice-task-number{font-size:.68rem;font-weight:850;color:#8992a5}
+.practice-state{font-size:.68rem;font-weight:850;color:#66718a}
+.task-fixed .practice-state{color:#16865d}.task-wrong .practice-state{color:#cf5c5c}.task-correct .practice-state{color:#267eaf}
+.practice-task-question{font-size:.84rem;font-weight:700;color:#39445f;margin:8px 0}
+.practice-task-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.practice-task-meta>span{font-size:.64rem;font-weight:750;border-radius:99px;padding:4px 8px;background:#f3f4f8;color:#788298}
+.practice-task-meta .meta-warn{background:#fff0ed;color:#d06454}.practice-task-meta .meta-help{background:#edf5ff;color:#397db8}.practice-task-meta .meta-success{background:#e9f8f0;color:#16865d}.practice-task-meta .meta-attempt{margin-left:auto}
+.recommendation-card{padding:18px 20px;border-radius:18px;background:linear-gradient(120deg,#fff7e9,#f4f0ff);border:1px solid #f0e8d9}
+.recommendation-card>span{font-size:.68rem;font-weight:900;letter-spacing:.1em;color:#92723c}
+.recommendation-card p{margin:8px 0 0;color:#5e5b69;font-size:.88rem}
+@media(max-width:650px){.practice-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.run-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.detail-section-heading{display:block}.detail-section-tag{display:inline-block;margin-top:8px}.practice-run-head{align-items:flex-start}}
+
+
+/* =========================================================
+   MathAI Premium UI Refresh — visual-only CSS layer
+   Original HTML structure, JavaScript and Firebase untouched.
+   ========================================================= */
+:root{
+ --blue:#4169f5;--sky:#edf3ff;--purple:#7657e8;--lav:#f1edff;
+ --green:#159b72;--mint:#e9f8f2;--orange:#e99a35;--peach:#fff4e7;
+ --ink:#17233f;--muted:#71809b;--line:#e5eaf4;--white:#fff;
+ --red:#dc5968;--shadow:0 16px 42px rgba(31,48,91,.085)
+}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 8% 0%,rgba(104,132,255,.12),transparent 32%),radial-gradient(ellipse at 95% 8%,rgba(143,103,237,.10),transparent 28%),#f5f7fc;color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif;letter-spacing:-.012em}
+.app{max-width:1360px;padding:clamp(14px,2.4vw,30px)}
+.topbar{position:relative;padding:15px 19px;margin-bottom:24px;background:rgba(255,255,255,.82);border:1px solid rgba(224,231,244,.9);border-radius:22px;box-shadow:0 8px 30px rgba(33,48,86,.055);backdrop-filter:blur(16px)}
+.brand{gap:14px}.logo{width:52px;height:52px;border-radius:17px;background:linear-gradient(145deg,#385ef1,#8663e9);box-shadow:0 9px 22px rgba(82,94,222,.25);font-size:27px}
+.brand h1{font-size:1.34rem;font-weight:850;letter-spacing:-.045em;color:#1c2948}.brand p{font-size:.82rem;color:#77839a}
+.tag{background:#f7f8fd;border-color:#e8ecf5;color:#697793;font-weight:650}
+.panel,.card{background:rgba(255,255,255,.96);border:1px solid #e7ebf4;border-radius:22px;padding:clamp(17px,2vw,25px);box-shadow:0 10px 32px rgba(28,44,83,.055);transition:box-shadow .22s ease,border-color .22s ease,transform .22s ease}
+.card:hover{border-color:#d9def5;box-shadow:0 16px 36px rgba(41,57,105,.09)}
+.hero{position:relative;isolation:isolate;overflow:hidden;padding:clamp(24px,4vw,42px);border:1px solid rgba(125,132,236,.15);border-radius:26px;background:linear-gradient(118deg,#eaf1ff 0%,#f1edff 54%,#e8f8ff 100%);box-shadow:0 14px 35px rgba(77,91,174,.08)}
+.hero:after{content:"½";position:absolute;z-index:-1;right:5%;top:50%;transform:translateY(-54%) rotate(-9deg);font-size:clamp(100px,17vw,205px);font-weight:900;line-height:1;color:rgba(100,105,220,.075);pointer-events:none}
+.hero h2{max-width:780px;color:#202c55;font-size:clamp(1.65rem,3.3vw,2.65rem);font-weight:850;letter-spacing:-.055em;line-height:1.12}
+.hero p{max-width:720px;color:#596783;font-size:1rem;line-height:1.7}
+h2,h3,h4,h5{letter-spacing:-.035em;color:#202c49}
+button{border-radius:13px;padding:11px 17px;font-weight:750;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+button:hover{transform:translateY(-2px);filter:none;box-shadow:0 8px 18px rgba(42,65,130,.12)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid rgba(76,111,245,.25);outline-offset:2px}
+.primary{background:linear-gradient(135deg,#4169f5,#765be8);color:#fff;box-shadow:0 7px 17px rgba(76,91,226,.2)}
+.secondary{background:#edf3ff;color:#3558b5}.purple{background:#f0edff;color:#684bd0}.green{background:#e8f8f1;color:#117d5b}.orange{background:#fff3e4;color:#a76417}.danger{background:#fff0f1;color:#b83d50}.plain{background:#f2f4f9;color:#53617b}
+.field label{color:#354361}.field input,.field select,.field textarea,input,select,textarea{border-color:#dfe5f0;border-radius:13px;color:#25324f;background:#fff}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#8296f5;box-shadow:0 0 0 4px rgba(91,116,239,.10)}
+.nav{border-radius:14px;transition:background .18s ease,color .18s ease,transform .18s ease}.nav:hover{transform:translateY(-1px)}
+.progress,.run-progress,.detail-error-track{background:#edf0f7;border-radius:99px;overflow:hidden}.progress span,.run-progress span{border-radius:99px}
+.tag,.badge,.pill{font-weight:700}
+.dash-kpi,.kpi-violet,.kpi-blue,.kpi-pink,.kpi-mint{border-radius:19px;box-shadow:0 8px 24px rgba(35,48,91,.055)}
+.student-detail-panel,.diagnostic-mini,.topic-progress-card,.practice-summary>div,.practice-run-card,.practice-task,.recommendation-card{border-radius:17px}
+.practice-run-card{border-color:#e7eaf4;box-shadow:0 7px 22px rgba(31,45,84,.04)}
+.practice-task{border-color:#e8ecf4}.practice-task-question{color:#273653;font-size:.92rem}
+.recommendation-card{background:linear-gradient(115deg,#fff8ec,#f3f0ff);border-color:#eee7f8}
+table{border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:14px}
+th{background:#f4f6fc;color:#53617d;font-weight:800}td,th{border-color:#e9edf5}
+@media(max-width:900px){.app{padding:15px}.topbar{padding:13px 15px}.panel,.card{border-radius:19px}}
+@media(max-width:650px){.app{padding:10px}.topbar{border-radius:17px;gap:10px}.brand h1{font-size:1.12rem}.logo{width:45px;height:45px}.hero{border-radius:20px;padding:22px 18px}.hero:after{right:2%;font-size:112px}.panel,.card{padding:16px;border-radius:17px}.practice-summary{gap:8px}.run-metrics{gap:7px}button{min-height:42px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -99,17 +309,65 @@
   <nav class="nav no-print"><button onclick="backToStudent()">← Оқушы бөліміне қайту</button><button class="active">📊 Админ кабинеті</button></nav>
   <div class="hero"><h2>Админ кабинеті</h2><p>Оқушылардың диагностикасын, жиі кездесетін қателерді және нәтижелер динамикасын талда.</p></div>
   <div class="note">Оқушы нәтижелері Firebase дерекқорында сақталады. Админ кабинеті Firebase аккаунты арқылы қорғалған. Оқушылардың аты-жөні мен деректерін мектептің дербес деректер талаптарына сай пайдаланыңыз.</div>
-  <div class="panel" style="margin:16px 0"><div class="section-head"><div><h3>🧩 Оқу материалдарын басқару</h3><p class="muted smalltext">Код жазбай, осы жерден видео, мәтін есеп және тапсырма қосасың. Бұл әзірге осы браузердегі сынақ нұсқасы; ортақ онлайн сақтау Firebase қосылғаннан кейін іске қосылады.</p></div></div><div class="grid">
-  <div class="col6 card"><h3>🎬 YouTube видео қосу</h3><div class="field"><label>Тақырып атауы</label><input id="videoTopic" placeholder="Мысалы: Жай бөлшектің негізгі қасиеті"></div><div class="field"><label>Тақырып нөмірі</label><select id="videoTopicId"><option value="16">16-тақырып</option><option value="17">17-тақырып</option></select></div><div class="field"><label>YouTube сілтемесі</label><input id="videoUrl" placeholder="https://www.youtube.com/watch?v=..."></div><div class="field"><label>Қысқаша сипаттама</label><textarea id="videoDesc" rows="2"></textarea></div><button class="primary" onclick="addMathAIContent('video')">Видеоны сақтау</button></div>
-  <div class="col6 card"><h3>📝 Тапсырма / мәтін есеп қосу</h3><div class="field"><label>Тақырып нөмірі</label><select id="taskTopic"><option value="16">16-тақырып</option><option value="17">17-тақырып</option></select></div><div class="field"><label>Тапсырма түрі</label><select id="taskKind"><option value="practice">Жаттығу</option><option value="word">Мәтіндік есеп</option></select></div><div class="field"><label>Деңгей</label><select id="taskLevel"><option value="A">A — Бірге үйренемін</option><option value="B">B — Өзім орындаймын</option><option value="C">C — Ойлан және зертте</option></select></div><div class="field"><label>Тапсырма мәтіні</label><textarea id="taskQuestion" rows="3" placeholder="Есептің шартын осында жаз..."></textarea></div><div class="field"><label>Жауап нұсқалары (үтірмен бөліп жаз)</label><input id="taskOptions" placeholder="1/2, 2/3, 3/4, 4/5"></div><div class="field"><label>Дұрыс жауап (нұсқамен дәл сәйкес болсын)</label><input id="taskAnswer" placeholder="Мысалы: 3/4"></div><div class="field"><label>Көмек</label><textarea id="taskHint" rows="2"></textarea></div><div class="field"><label>Түсіндірме</label><textarea id="taskExplain" rows="2"></textarea></div><div class="field"><label>Сурет сілтемесі (міндетті емес)</label><input id="taskImage" placeholder="https://..."></div><button class="primary" onclick="addMathAIContent('task')">Тапсырманы сақтау</button></div></div><div style="margin-top:18px"><h3>📚 Жарияланған материалдар</h3><div id="contentManagerList"></div></div></div>
+  <div class="admin-hub" id="adminHub">
+    <div class="admin-hub-intro"><span class="admin-eyebrow">MATHAI · ADMIN WORKSPACE</span><h2>Басқару орталығы</h2><p>Қажетті бөлімді таңдаңыз. Әр бөлімнің материалдары мен деректері бөлек көрсетіледі.</p></div>
+    <div class="admin-hub-grid">
+      <button class="admin-hub-card materials-hub" onclick="openAdminPane('materials')"><span class="admin-hub-icon">📚</span><span class="admin-hub-title">Оқу материалдарын басқару</span><span class="admin-hub-desc">Видео материалдар, тапсырмалар, мәтіндік есептер және жарияланған контент.</span><span class="admin-hub-action">Бөлімді ашу <b>→</b></span></button>
+      <button class="admin-hub-card students-hub" onclick="openAdminPane('students')"><span class="admin-hub-icon">👩‍🎓</span><span class="admin-hub-title">Оқушылар деректері</span><span class="admin-hub-desc">Оқушылар тізімі, оқу нәтижелері, қателер талдауы және жеке профильдер.</span><span class="admin-hub-action">Бөлімді ашу <b>→</b></span></button>
+      <button class="admin-hub-card games-hub" onclick="openAdminPane('games')"><span class="admin-hub-icon">🎮</span><span class="admin-hub-title">Ойын нәтижелері</span><span class="admin-hub-desc">Оқушылардың ойындары, жинаған ұпайлары, дұрыс және қате жауаптары.</span><span class="admin-hub-action">Бөлімді ашу <b>→</b></span></button>
+    </div>
+  </div>
+  <div class="admin-pane" id="adminPaneMaterials">
+  <div class="admin-pane-heading"><button class="admin-back" onclick="openAdminHome()">← Басқару орталығы</button><span class="admin-section-tag materials-tag">01 · ОҚУ КОНТЕНТІ</span><h2>📚 Оқу материалдарын басқару</h2><p>Видео, тапсырма және мәтіндік есептерді осы бөлімнен басқарыңыз.</p></div>
+  <section class="panel material-management-section" aria-label="Оқу материалдарын басқару" style="margin:16px 0"><div class="section-head"><div><h3>🧩 Материал құру</h3><p class="muted smalltext">Видео материалдар мен тапсырмаларды жеке карточкалар арқылы қосыңыз.</p></div></div><div class="grid material-management-grid">
+  <div class="col6 card material-type-card"><div class="material-card-heading"><span class="material-icon">🎬</span><div><h3>Видео материалдар</h3><p class="muted smalltext">YouTube видеосын қосу және сақтау</p></div></div><div class="field"><label>Тақырып атауы</label><input id="videoTopic" placeholder="Мысалы: Жай бөлшектің негізгі қасиеті"></div><div class="field"><label>Тақырып нөмірі</label><select id="videoTopicId"><option value="16">16-тақырып</option><option value="17">17-тақырып</option></select></div><div class="field"><label>YouTube сілтемесі</label><input id="videoUrl" placeholder="https://www.youtube.com/watch?v=..."></div><div class="field"><label>Қысқаша сипаттама</label><textarea id="videoDesc" rows="2"></textarea></div><button class="primary" onclick="addMathAIContent('video')">Видеоны сақтау</button></div>
+  <div class="col6 card material-type-card"><div class="material-card-heading"><span class="material-icon">📝</span><div><h3>Тапсырмалар мен мәтіндік есептер</h3><p class="muted smalltext">Жаттығу және мәтіндік есеп құрастыру</p></div></div><div class="field"><label>Тақырып нөмірі</label><select id="taskTopic"><option value="16">16-тақырып</option><option value="17">17-тақырып</option></select></div><div class="field"><label>Тапсырма түрі</label><select id="taskKind"><option value="practice">Жаттығу</option><option value="word">Мәтіндік есеп</option></select></div><div class="field"><label>Деңгей</label><select id="taskLevel"><option value="A">A — Бірге үйренемін</option><option value="B">B — Өзім орындаймын</option><option value="C">C — Ойлан және зертте</option></select></div><div class="field"><label>Тапсырма мәтіні</label><textarea id="taskQuestion" rows="3" placeholder="Есептің шартын осында жаз..."></textarea></div><div class="field"><label>Жауап нұсқалары (үтірмен бөліп жаз)</label><input id="taskOptions" placeholder="1/2, 2/3, 3/4, 4/5"></div><div class="field"><label>Дұрыс жауап (нұсқамен дәл сәйкес болсын)</label><input id="taskAnswer" placeholder="Мысалы: 3/4"></div><div class="field"><label>Көмек</label><textarea id="taskHint" rows="2"></textarea></div><div class="field"><label>Түсіндірме</label><textarea id="taskExplain" rows="2"></textarea></div><div class="field"><label>Сурет сілтемесі (міндетті емес)</label><input id="taskImage" placeholder="https://..."></div><button class="primary" onclick="addMathAIContent('task')">Тапсырманы сақтау</button></div></div><div class="published-materials" style="margin-top:18px"><h3>📚 Жарияланған материалдар</h3><div id="contentManagerList"></div></div></section>
+  </div>
+  <div class="admin-pane" id="adminPaneStudents">
+  <div class="admin-pane-heading"><button class="admin-back" onclick="openAdminHome()">← Басқару орталығы</button><span class="admin-section-tag students-tag">02 · ОҚУШЫЛАР</span><h2>👩‍🎓 Оқушылар деректері</h2><p>Оқушылардың оқу жетістіктері мен диагностикасы осы бөлімде.</p></div>
+  <section class="student-data-section" aria-label="Оқушылар деректері"><div class="section-head student-data-heading"><div><h3>Оқушылардың оқу көрсеткіштері</h3><p class="muted smalltext">Оқушылардың аты-жөні, оқу нәтижелері, қателері және статистикасы — тек осы бөлімде.</p></div></div>
   <div id="teacherStats" class="grid" style="margin:16px 0"></div>
   <div class="panel" style="margin-bottom:16px"><div class="section-head"><div><h3>Оқушылар нәтижесі</h3><p class="muted smalltext">Кезеңдерді салыстыру және жеке жұмыстарды ашу.</p></div><div class="row no-print"><input id="teacherSearch" placeholder="Оқушыны іздеу..." oninput="renderTeacher()" style="padding:10px;border:1px solid var(--line);border-radius:12px"><button class="secondary" onclick="refreshTeacherData()">Онлайн деректерді жаңарту</button><button class="secondary" onclick="exportCSV()">CSV жүктеу</button><button class="plain" onclick="window.print()">Есепті басып шығару</button><button class="danger" onclick="clearAllData()">Барлық деректі өшіру</button></div></div><div id="teacherTable" class="table-wrap"></div></div>
   <div class="grid"><div class="col6 panel"><h3>Қателер жиілігі</h3><div id="errorChart"></div></div><div class="col6 panel"><h3>Орташа диагностика нәтижесі</h3><div id="scoreChart"></div></div></div>
-  <div id="studentDetail" style="margin-top:16px"></div>
+  <div id="studentDetail" style="margin-top:16px"></div></section>
+  </div>
+  <div class="admin-pane" id="adminPaneGames">
+    <div class="admin-pane-heading"><button class="admin-back" onclick="openAdminHome()">← Басқару орталығы</button><span class="admin-section-tag games-tag">03 · ОЙЫН АНАЛИТИКАСЫ</span><h2>🎮 Ойын нәтижелері</h2><p>Оқушылардың ойын барысындағы ұпайлары мен белсенділігі бөлек көрсетіледі.</p></div>
+    <section class="games-results-section"><div class="games-results-card"><div class="games-results-title"><span>🏆</span><div><h3>Оқушылардың ойын нәтижелері</h3><p>Ойын бойынша тіркелген нәтижелер мен ұпайлар</p></div></div><div id="gameResultsTable" class="table-wrap"></div></div></section>
+  </div>
 </section>
 <div class="footer">MathAI: Бөлшектерді оңай меңгеру · 5-сынып математикасы</div>
 </div>
 <div id="modalRoot"></div><div id="teacherLockRoot"></div>
+
+<style id="admin-section-separation-design">
+.material-management-section{border:1px solid rgba(99,102,241,.18);background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(239,246,255,.92));box-shadow:0 14px 38px rgba(35,45,90,.07);border-radius:22px;padding:clamp(16px,2.4vw,26px)}
+.material-management-section>.section-head h3,.student-data-heading h3{font-weight:800;letter-spacing:-.02em}
+.material-management-grid{gap:18px}
+.material-type-card{border:1px solid rgba(100,116,139,.16);border-radius:18px;padding:20px;background:rgba(255,255,255,.94);box-shadow:0 8px 24px rgba(35,45,90,.055);min-width:0}
+.material-card-heading{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.material-card-heading h3{margin:0 0 4px}
+.material-card-heading p{margin:0}
+.material-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#e0e7ff,#cffafe);font-size:22px;flex:0 0 auto}
+.published-materials{padding-top:16px;border-top:1px solid rgba(100,116,139,.16)}
+.student-data-section{margin-top:26px;padding-top:22px;border-top:3px solid rgba(99,102,241,.18)}
+.student-data-heading{padding:4px 2px 12px}
+@media(max-width:700px){.material-type-card{padding:15px}.material-management-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}.material-management-section{padding:15px;border-radius:17px}}
+</style>
+
+<style id="admin-three-section-workspace">
+#teacherView .admin-hub{margin:22px 0 30px;padding:clamp(20px,3vw,34px);border-radius:28px;background:radial-gradient(circle at 90% 0%,rgba(139,92,246,.16),transparent 32%),linear-gradient(135deg,#111a3b 0%,#202b59 58%,#263b70 100%);color:#fff;box-shadow:0 24px 60px rgba(20,30,70,.22)}
+.admin-hub-intro{max-width:720px;margin-bottom:24px}.admin-eyebrow{font-size:11px;letter-spacing:.18em;font-weight:800;color:#a5c8ff}.admin-hub-intro h2{font-size:clamp(25px,3vw,36px);margin:9px 0;color:#fff;letter-spacing:-.04em}.admin-hub-intro p{margin:0;color:#d5def8;line-height:1.65}
+.admin-hub-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.admin-hub-card{appearance:none;text-align:left;display:flex;flex-direction:column;align-items:flex-start;min-height:235px;padding:22px;border:1px solid rgba(255,255,255,.65);border-radius:22px;background:#fff;color:#17213f;cursor:pointer;box-shadow:0 12px 28px rgba(4,12,38,.14);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}.admin-hub-card:hover{transform:translateY(-5px);box-shadow:0 20px 38px rgba(4,12,38,.22)}.admin-hub-icon{display:grid;place-items:center;width:52px;height:52px;border-radius:17px;font-size:25px;margin-bottom:17px}.materials-hub .admin-hub-icon{background:#eee9ff}.students-hub .admin-hub-icon{background:#e2efff}.games-hub .admin-hub-icon{background:#dcf8f1}.admin-hub-title{font-size:18px;font-weight:850;line-height:1.3}.admin-hub-desc{font-size:13px;line-height:1.6;color:#66718c;margin-top:10px;flex:1}.admin-hub-action{font-size:13px;font-weight:800;margin-top:18px}.materials-hub .admin-hub-action{color:#7045d6}.students-hub .admin-hub-action{color:#2563c7}.games-hub .admin-hub-action{color:#07866d}.admin-hub-action b{font-size:18px;margin-left:5px}
+.admin-pane{display:none;animation:adminPaneIn .24s ease}.admin-pane.active{display:block}@keyframes adminPaneIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}.admin-pane-heading{padding:20px 22px;margin:18px 0;border-radius:22px;background:#fff;border:1px solid #e6eaf3;box-shadow:0 10px 30px rgba(26,39,76,.06)}.admin-pane-heading h2{margin:12px 0 5px;font-size:clamp(23px,2.5vw,30px);color:#17213f}.admin-pane-heading p{margin:0;color:#6b7690}.admin-back{border:0;background:#f1f4fa;color:#34415f;padding:9px 13px;border-radius:11px;font-weight:750;cursor:pointer}.admin-section-tag{display:inline-block;margin-left:12px;font-size:10px;font-weight:850;letter-spacing:.13em;padding:7px 10px;border-radius:999px}.materials-tag{background:#eee9ff;color:#7045d6}.students-tag{background:#e2efff;color:#2563c7}.games-tag{background:#dcf8f1;color:#07866d}
+#adminPaneMaterials .material-management-section{border-color:#ded4ff;background:linear-gradient(145deg,#fff,#f8f5ff)}#adminPaneStudents .student-data-section{margin-top:0;padding:22px;border:1px solid #d8e7ff;border-top:3px solid #4d8de8;border-radius:22px;background:linear-gradient(145deg,#fff,#f5f9ff)}#adminPaneGames .games-results-card{padding:22px;border:1px solid #c9eee4;border-radius:22px;background:linear-gradient(145deg,#fff,#f1fcf8);box-shadow:0 12px 30px rgba(18,90,75,.07)}.games-results-title{display:flex;align-items:center;gap:13px;margin-bottom:16px}.games-results-title>span{width:48px;height:48px;display:grid;place-items:center;background:#d9f7ee;border-radius:15px;font-size:24px}.games-results-title h3{margin:0 0 4px}.games-results-title p{margin:0;color:#718096;font-size:13px}
+@media(max-width:800px){.admin-hub-grid{grid-template-columns:1fr}.admin-hub-card{min-height:190px}.admin-pane-heading{padding:16px}.admin-back{margin-bottom:8px}.admin-section-tag{margin-left:0}}
+</style>
+<script>
+function openAdminHome(){document.getElementById('adminHub')?.classList.remove('hidden');document.querySelectorAll('#teacherView .admin-pane').forEach(p=>p.classList.remove('active'));}
+function openAdminPane(which){document.getElementById('adminHub')?.classList.add('hidden');document.querySelectorAll('#teacherView .admin-pane').forEach(p=>p.classList.remove('active'));const map={materials:'adminPaneMaterials',students:'adminPaneStudents',games:'adminPaneGames'};document.getElementById(map[which])?.classList.add('active');if(which==='games')renderTeacher();if(which==='materials')renderContentManager();}
+</script>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
@@ -333,8 +591,8 @@ function renderTeacher(){renderContentManager();
  renderTeacherBase();
  const db=loadDB(),all=Object.values(db.students);
  const rows=all.flatMap(s=>(s.games||[]).map(g=>({name:s.name,cls:s.cls,...g}))).sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,20);
- const target=document.getElementById('teacherTable');
- if(target)target.insertAdjacentHTML('beforeend',`<div class="card" style="margin-top:16px"><h3>🎮 Оқушылардың ойын нәтижелері</h3>${rows.length?`<div class="table-wrap"><table><thead><tr><th>Оқушы</th><th>Сынып</th><th>Ойын</th><th>Ұпай</th><th>Дұрыс/қате</th><th>Уақыт</th><th>Күні</th></tr></thead><tbody>${rows.map(g=>`<tr><td>${esc(g.name)}</td><td>${esc(g.cls)}</td><td>${esc(g.gameName||gameName(g.type||''))}</td><td>${g.score}/${g.total}</td><td>${g.correct??g.score} / ${g.wrong??Math.max(0,g.total-g.score)}</td><td>${g.duration||0} с</td><td>${new Date(g.date).toLocaleDateString('kk-KZ')}</td></tr>`).join('')}</tbody></table></div>`:'Ойын нәтижелері әлі тіркелмеген.'}</div>`);
+ const target=document.getElementById('gameResultsTable');
+ if(target)target.innerHTML=`<div class="card" style="margin-top:16px"><h3>🎮 Оқушылардың ойын нәтижелері</h3>${rows.length?`<div class="table-wrap"><table><thead><tr><th>Оқушы</th><th>Сынып</th><th>Ойын</th><th>Ұпай</th><th>Дұрыс/қате</th><th>Уақыт</th><th>Күні</th></tr></thead><tbody>${rows.map(g=>`<tr><td>${esc(g.name)}</td><td>${esc(g.cls)}</td><td>${esc(g.gameName||gameName(g.type||''))}</td><td>${g.score}/${g.total}</td><td>${g.correct??g.score} / ${g.wrong??Math.max(0,g.total-g.score)}</td><td>${g.duration||0} с</td><td>${new Date(g.date).toLocaleDateString('kk-KZ')}</td></tr>`).join('')}</tbody></table></div>`:'Ойын нәтижелері әлі тіркелмеген.'}</div>`;
 }
 function fractionText(n,d){return `${n}/${d}`}
 function makeFoodQuestion(kind,total,eaten,food){
@@ -460,7 +718,53 @@ function answerGame(i){
 }
 function nextGameQuestion(){const s=gameState;if(!s)return;if(!s.answered.some(a=>a.q===s.list[s.idx].q)){document.getElementById('gameFeedback').innerHTML='<div class="feedback hint">Алдымен жауап беріп, оны тексер.</div>';return}s.idx++;s.attempts=0;s.helped=false;renderGame()}
 function previousGameQuestion(){const s=gameState;if(!s||s.idx===0)return;s.idx--;s.attempts=0;s.helped=false;renderGame()}
-function renderTeacherBase(){const db=loadDB(),all=Object.values(db.students),search=(document.getElementById('teacherSearch')?.value||'').toLocaleLowerCase('kk-KZ'),students=all.filter(s=>s.name.toLocaleLowerCase('kk-KZ').includes(search));const withA=all.filter(s=>s.diagnostics?.initial),withB=all.filter(s=>s.diagnostics?.repeat);const avg=arr=>arr.length?Math.round(arr.reduce((n,s)=>n+s.diagnostics.initial.percent,0)/arr.length):0;document.getElementById('teacherStats').innerHTML=`<div class="col3"><div class="stat">Тіркелген оқушы<strong>${all.length}</strong></div></div><div class="col3"><div class="stat">Бастапқы диагностика<strong>${withA.length}</strong></div></div><div class="col3"><div class="stat">Қайталама диагностика<strong>${withB.length}</strong></div></div><div class="col3"><div class="stat">Бастапқы орташа<strong>${avg(withA)}%</strong></div></div>`;document.getElementById('teacherTable').innerHTML=students.length?`<table><thead><tr><th>№</th><th>Оқушының аты-жөні</th><th>Сыныбы</th><th>1-диагностика</th><th>2-диагностика</th><th>Өзгеріс</th><th>16-тақырып қатесі</th><th>17-тақырып қатесі</th><th>Әрекет</th></tr></thead><tbody>${students.map((s,i)=>{const a=s.diagnostics?.initial,b=s.diagnostics?.repeat,diff=a&&b?b.percent-a.percent:null,ea=countTopicErrors(a?.answers||[],'16'),eb=countTopicErrors(a?.answers||[],'17');return `<tr><td>${i+1}</td><td><b>${esc(s.name)}</b></td><td>${esc(s.cls)}</td><td>${a?a.score+'/10 ('+a.percent+'%)':'Орындалмаған'}</td><td>${b?b.score+'/10 ('+b.percent+'%)':'Орындалмаған'}</td><td>${diff===null?'—':(diff>0?'+':'')+diff+' п.п.'}</td><td>${ea||'—'}</td><td>${eb||'—'}</td><td><button class="secondary small" onclick="showStudentDetail('${encodeURIComponent(Object.keys(db.students).find(k=>db.students[k]===s)||studentKey(s.name,s.cls))}')">Толығырақ</button></td></tr>`}).join('')}</tbody></table>`:'<div class="empty">Әзірге оқушы деректері жоқ.</div>';const errors={};all.forEach(s=>{const a=s.diagnostics?.initial;if(a)a.answers.filter(x=>!x.correct).forEach(x=>errors[x.error]=(errors[x.error]||0)+1)});const sorted=Object.entries(errors).sort((a,b)=>b[1]-a[1]).slice(0,6);document.getElementById('errorChart').innerHTML=sorted.length?sorted.map(([k,v])=>`<div style="margin:10px 0"><div class="row smalltext"><span>${esc(errorNames[k]||k)}</span><b class="right">${v}</b></div><div class="progress"><span style="width:${Math.min(100,v/Math.max(...sorted.map(x=>x[1]))*100)}%"></span></div></div>`).join(''):'<p class="muted">Қате талдау үшін диагностика нәтижелері керек.</p>';const aScores=withA.map(s=>s.diagnostics.initial.percent),bScores=withB.map(s=>s.diagnostics.repeat.percent),av1=aScores.length?Math.round(aScores.reduce((a,b)=>a+b,0)/aScores.length):0,av2=bScores.length?Math.round(bScores.reduce((a,b)=>a+b,0)/bScores.length):0;document.getElementById('scoreChart').innerHTML=`<div class="bars"><div class="bar-col"><div class="bar-value">${av1}%</div><div class="bar" style="height:${Math.max(4,av1)}px"></div><div class="bar-label">Бастапқы</div></div><div class="bar-col"><div class="bar-value">${av2}%</div><div class="bar" style="height:${Math.max(4,av2)}px;background:linear-gradient(180deg,#67d8a4,#15966a)"></div><div class="bar-label">Қайталама</div></div></div><p class="muted smalltext">Ескерту: бұл көрсеткіштер әр кезеңде тапсырған оқушылар бойынша бөлек орташа есептеледі. Екі кезеңді де тапсырған оқушыларды ғана салыстыру керек.</p>`}
+function renderTeacherBase(){
+ const db=loadDB(),all=Object.values(db.students);
+ const search=(document.getElementById('teacherSearch')?.value||'').toLocaleLowerCase('kk-KZ');
+ const students=all.filter(s=>s.name.toLocaleLowerCase('kk-KZ').includes(search));
+ const withA=all.filter(s=>s.diagnostics?.initial),withB=all.filter(s=>s.diagnostics?.repeat);
+ const avg=arr=>arr.length?Math.round(arr.reduce((n,s)=>n+s.diagnostics.initial.percent,0)/arr.length):0;
+ const avgRepeat=withB.length?Math.round(withB.reduce((n,s)=>n+s.diagnostics.repeat.percent,0)/withB.length):0;
+ const improvement=withA.filter(s=>s.diagnostics?.repeat).map(s=>s.diagnostics.repeat.percent-s.diagnostics.initial.percent);
+ const avgGain=improvement.length?Math.round(improvement.reduce((a,b)=>a+b,0)/improvement.length):0;
+ const card=(icon,label,value,sub,cls)=>`<div class="col3"><div class="dash-kpi ${cls}"><div class="kpi-top"><span class="kpi-icon">${icon}</span><span class="kpi-label">${label}</span></div><div class="kpi-value">${value}</div><div class="kpi-sub">${sub}</div><div class="kpi-orb"></div></div></div>`;
+ document.getElementById('teacherStats').innerHTML=
+  card('👩‍🎓','Тіркелген оқушы',all.length,'Платформадағы барлық оқушы','kpi-violet')+
+  card('📝','Бастапқы диагностика',withA.length,`Қамтылуы: ${all.length?Math.round(withA.length/all.length*100):0}%`,'kpi-blue')+
+  card('🎯','Қайталама диагностика',withB.length,'Білімін қайта тексергендер','kpi-pink')+
+  card('🚀','Орташа өсім',(avgGain>0?'+':'')+avgGain+' п.п.','Екі кезеңді тапсырған оқушылар','kpi-mint');
+
+ document.getElementById('teacherTable').innerHTML=students.length?`<table class="results-table"><thead><tr><th>№</th><th>Оқушының аты-жөні</th><th>Сыныбы</th><th>1-диагностика</th><th>2-диагностика</th><th>Өзгеріс</th><th>16-тақырып қатесі</th><th>17-тақырып қатесі</th><th>Әрекет</th></tr></thead><tbody>${students.map((s,i)=>{
+  const a=s.diagnostics?.initial,b=s.diagnostics?.repeat,diff=a&&b?b.percent-a.percent:null;
+  const ea=countTopicErrors(a?.answers||[],'16'),eb=countTopicErrors(a?.answers||[],'17');
+  const score=(x,color)=>x?`<span class="score-chip ${color}">${x.score}/10 <b>${x.percent}%</b></span>`:'<span class="status-muted">Орындалмаған</span>';
+  return `<tr><td><span class="row-number">${i+1}</span></td><td><b class="student-name">${esc(s.name)}</b></td><td><span class="class-chip">${esc(s.cls)}</span></td><td>${score(a,'score-blue')}</td><td>${score(b,'score-violet')}</td><td>${diff===null?'<span class="status-muted">—</span>':`<span class="gain-chip ${diff>=0?'gain-up':'gain-down'}">${diff>0?'+':''}${diff} п.п.</span>`}</td><td><span class="error-count count-orange">${ea}</span></td><td><span class="error-count count-pink">${eb}</span></td><td><button class="detail-btn" onclick="showStudentDetail('${encodeURIComponent(Object.keys(db.students).find(k=>db.students[k]===s)||studentKey(s.name,s.cls))}')">Толығырақ ↗</button></td></tr>`;
+ }).join('')}</tbody></table>`:'<div class="empty">Әзірге оқушы деректері жоқ.</div>';
+
+ const errors={};all.forEach(s=>{const a=s.diagnostics?.initial;if(a)a.answers.filter(x=>!x.correct).forEach(x=>errors[x.error]=(errors[x.error]||0)+1)});
+ const sorted=Object.entries(errors).sort((a,b)=>b[1]-a[1]).slice(0,6);
+ const palette=['#8065ef','#36a4ef','#ff9b55','#f06eaa','#29b99a','#e0b347'];
+ const maxErr=Math.max(1,...sorted.map(x=>x[1]));
+ document.getElementById('errorChart').innerHTML=sorted.length?
+ `<div class="chart-caption"><span>Қате түрлері бойынша талдау</span><b>${sorted.reduce((n,x)=>n+x[1],0)} қате</b></div>
+ <div class="error-bars">${sorted.map(([k,v],i)=>`<div class="error-line"><div class="error-line-head"><span><i style="background:${palette[i%palette.length]}"></i>${esc(errorNames[k]||k)}</span><b>${v}</b></div><div class="error-track"><span style="width:${Math.round(v/maxErr*100)}%;background:linear-gradient(90deg,${palette[i%palette.length]},${palette[i%palette.length]}99)"></span></div></div>`).join('')}</div>`:
+ '<div class="chart-empty">📊 Қате диаграммасын көру үшін оқушылар диагностика орындауы керек.</div>';
+
+ const aScores=withA.map(s=>s.diagnostics.initial.percent),bScores=withB.map(s=>s.diagnostics.repeat.percent);
+ const av1=aScores.length?Math.round(aScores.reduce((a,b)=>a+b,0)/aScores.length):0;
+ const av2=bScores.length?Math.round(bScores.reduce((a,b)=>a+b,0)/bScores.length):0;
+ document.getElementById('scoreChart').innerHTML=`
+ <div class="score-overview">
+  <div class="score-donut" style="--score:${av1}"><div><strong>${av1}%</strong><small>Бастапқы</small></div></div>
+  <div class="score-donut donut-purple" style="--score:${av2}"><div><strong>${av2}%</strong><small>Қайталама</small></div></div>
+ </div>
+ <div class="score-legend"><span><i class="legend-blue"></i>Бастапқы орташа</span><b>${av1}%</b><span><i class="legend-purple"></i>Қайталама орташа</span><b>${av2}%</b></div>
+ <div class="comparison-bars">
+  <div><div class="comparison-head"><span>Бастапқы диагностика</span><b>${av1}%</b></div><div class="comparison-track"><span class="fill-blue" style="width:${av1}%"></span></div></div>
+  <div><div class="comparison-head"><span>Қайталама диагностика</span><b>${av2}%</b></div><div class="comparison-track"><span class="fill-purple" style="width:${av2}%"></span></div></div>
+ </div>
+ <p class="chart-footnote">Көрсеткіштер әр кезеңді орындаған оқушылардың орташа нәтижесі бойынша есептеледі.</p>`;
+}
 function youtubeEmbed(url){try{const u=new URL(url);let id='';if(u.hostname.includes('youtu.be'))id=u.pathname.slice(1);else if(u.hostname.includes('youtube.com'))id=u.searchParams.get('v')||u.pathname.split('/').filter(Boolean).pop();return id&&/^[A-Za-z0-9_-]{6,20}$/.test(id)?'https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id):''}catch(e){return ''}}
 function addMathAIContent(type){const lib=loadContent();if(type==='video'){const title=clean(document.getElementById('videoTopic').value),url=clean(document.getElementById('videoUrl').value),embed=youtubeEmbed(url);if(!title||!embed){alert('Тақырып атауын және дұрыс YouTube сілтемесін енгіз.');return}lib.videos.push({id:'v'+Date.now(),title,topic:document.getElementById('videoTopicId').value,url,embed,desc:clean(document.getElementById('videoDesc').value),published:true,date:new Date().toISOString()});['videoTopic','videoUrl','videoDesc'].forEach(id=>document.getElementById(id).value='');}else{const q=clean(document.getElementById('taskQuestion').value),opts=document.getElementById('taskOptions').value.split(',').map(clean).filter(Boolean),a=clean(document.getElementById('taskAnswer').value),topic=document.getElementById('taskTopic').value;if(!q||opts.length<2||!a||!opts.includes(a)){alert('Тапсырма мәтінін, кемінде екі жауап нұсқасын және солардың ішіндегі дұрыс жауапты енгіз.');return}lib.tasks.push({id:'t'+Date.now(),topic,q,opts,a,level:document.getElementById('taskLevel').value,kind:document.getElementById('taskKind').value,hint:clean(document.getElementById('taskHint').value),explain:clean(document.getElementById('taskExplain').value),image:clean(document.getElementById('taskImage').value),published:true,date:new Date().toISOString()});['taskQuestion','taskOptions','taskAnswer','taskHint','taskExplain','taskImage'].forEach(id=>document.getElementById(id).value='');}saveContent(lib);renderContentManager();alert(type==='video'?'Видео сақталды.':'Тапсырма сақталды.');}
 function toggleContent(type,id){const lib=loadContent(),arr=type==='video'?lib.videos:lib.tasks,item=arr.find(x=>x.id===id);if(item)item.published=!item.published;saveContent(lib);renderContentManager();}
@@ -472,11 +776,22 @@ function showStudentDetail(encoded){
  const key=decodeURIComponent(encoded),db=loadDB(),s=db.students[key];if(!s)return;
  const a=s.diagnostics?.initial,b=s.diagnostics?.repeat,answers=[...(a?.answers||[]),...(b?.answers||[])];
  const errors={};answers.filter(x=>!x.correct).forEach(x=>errors[x.error]=(errors[x.error]||0)+1);
- const sorted=Object.entries(errors).sort((x,y)=>y[1]-x[1]);
- const maxErr=Math.max(1,...sorted.map(x=>x[1]));
- const chart=sorted.length?sorted.map(([k,v])=>`<div style="margin:12px 0"><div class="row smalltext"><span>${esc(errorNames[k]||k)}</span><b class="right">${v} рет</b></div><div class="progress"><span style="width:${Math.round(v/maxErr*100)}%;background:linear-gradient(90deg,#8b7cf6,#4d83e8)"></span></div></div>`).join(''):'<p class="muted">Қате диаграммасын құру үшін диагностика тапсырмаларын орындау қажет.</p>';
- const topicCard=(label,topic)=>{const aa=a?.answers||[],bb=b?.answers||[],total=aa.filter(x=>x.topic===topic).length,wrong=aa.filter(x=>x.topic===topic&&!x.correct).length,rtotal=bb.filter(x=>x.topic===topic).length,rwrong=bb.filter(x=>x.topic===topic&&!x.correct).length;return `<div class="col6"><div class="stat">${label}<strong>${total?wrong+'/'+total:'—'}</strong><span class="muted smalltext">Бастапқы қате</span><div class="progress"><span style="width:${total?wrong/total*100:0}%;background:#ef8b65"></span></div><span class="muted smalltext">Қайталама: ${rtotal?rwrong+'/'+rtotal+' қате':'орындалмаған'}</span></div></div>`};
- document.getElementById('studentDetail').innerHTML=`<div class="panel"><div class="section-head"><div><h3>${esc(s.name)} · жеке диагностика</h3><p class="muted">${esc(s.cls)}</p></div><button class="plain" onclick="document.getElementById('studentDetail').innerHTML=''">Жабу</button></div><div class="grid"><div class="col6"><h4>Бастапқы диагностика</h4>${a?`<p>${a.score}/10 · ${a.percent}% · ${new Date(a.date).toLocaleString('kk-KZ')}</p>${renderErrorSummary(a.answers)}`:'Орындалмаған'}</div><div class="col6"><h4>Қайталама диагностика</h4>${b?`<p>${b.score}/10 · ${b.percent}% · ${new Date(b.date).toLocaleString('kk-KZ')}</p>${renderErrorSummary(b.answers)}`:'Орындалмаған'}</div>${topicCard('16-тақырып: Жай бөлшекті оқу және жазу','16')}${topicCard('17-тақырып: Жай бөлшектің негізгі қасиеті','17')}<div class="col12"><h4>📊 Оқушының қателер диаграммасы</h4>${chart}</div><div class="col12"><h4>📝 Үйрену тапсырмаларының талдауы</h4>${(s.practice||[]).length?(s.practice||[]).map((run,ri)=>`<div class="card" style="margin:8px 0"><b>${ri+1}. ${esc(run.topic||'Тақырып')} · ${run.score}/${run.total}</b><div class="smalltext muted">${new Date(run.date).toLocaleString('kk-KZ')}</div><div class="smalltext">Алғашқыда қате: ${(run.answers||[]).filter(x=>x.hadError).length} · Көмек көрсетілді: ${(run.answers||[]).filter(x=>x.helped).length} · Көмекпен түзетті: ${(run.answers||[]).filter(x=>x.correctedAfterHelp).length}</div>${(run.answers||[]).map((x,j)=>`<div class="smalltext" style="padding:5px 0;border-top:1px solid #e8edf5">${j+1}. ${esc(x.q)} — ${x.hadError?'Алғашқы жауап қате':''} ${x.helped?'· Көмек берілді':''} · ${x.correct?'Дұрыс аяқтады':'Қате' } · ${x.attemptCount||1} әрекет</div>`).join('')}</div>`).join(''):'<p class="muted">Әзірге үйрену тапсырмаларының сақталған нәтижесі жоқ.</p>'}</div><div class="col12"><h4>Жеке ұсыныс</h4><p>${recommendation(answers)}</p></div></div></div>`;
+ const sorted=Object.entries(errors).sort((x,y)=>y[1]-x[1]),maxErr=Math.max(1,...sorted.map(x=>x[1]));
+ const chart=sorted.length?sorted.map(([k,v],i)=>`<div class="detail-error-row"><div class="detail-error-head"><span><i class="detail-dot dot-${i%5}"></i>${esc(errorNames[k]||k)}</span><b>${v} рет</b></div><div class="detail-error-track"><span style="width:${Math.round(v/maxErr*100)}%"></span></div></div>`).join(''):'<div class="detail-empty">📊 Қате диаграммасын құру үшін диагностика тапсырмаларын орындау қажет.</div>';
+ const topicCard=(label,topic,theme)=>{const aa=a?.answers||[],bb=b?.answers||[],total=aa.filter(x=>x.topic===topic).length,wrong=aa.filter(x=>x.topic===topic&&!x.correct).length,rtotal=bb.filter(x=>x.topic===topic).length,rwrong=bb.filter(x=>x.topic===topic&&!x.correct).length;return `<div class="col6"><div class="topic-progress-card ${theme}"><span class="topic-mini-icon">${topic==='16'?'🍕':'🧩'}</span><div class="topic-progress-title">${label}</div><div class="topic-progress-number">${total?wrong+'/'+total:'—'}</div><span class="topic-progress-caption">Бастапқы диагностикадағы қате</span><div class="detail-progress"><span style="width:${total?wrong/total*100:0}%"></span></div><span class="topic-progress-repeat">Қайталама: ${rtotal?rwrong+'/'+rtotal+' қате':'орындалмаған'}</span></div></div>`};
+ const runs=s.practice||[];
+ const runCards=runs.length?runs.slice().reverse().map((run,ri)=>{
+  const list=run.answers||[],wrong=list.filter(x=>x.hadError).length,helped=list.filter(x=>x.helped).length,fixed=list.filter(x=>x.correctedAfterHelp).length,finished=list.filter(x=>x.correct).length;
+  const pct=run.total?Math.round((run.score/run.total)*100):0;
+  const taskCards=list.map((x,j)=>{
+   const state=x.correctedAfterHelp?'Түзетіп орындады':x.hadError&&!x.correct?'Қате жауап сақталды':x.correct?'Дұрыс орындады':'Аяқталмаған';
+   const stateClass=x.correctedAfterHelp?'task-fixed':x.hadError&&!x.correct?'task-wrong':x.correct?'task-correct':'task-pending';
+   return `<article class="practice-task ${stateClass}"><div class="practice-task-top"><span class="practice-task-number">Тапсырма ${j+1}</span><span class="practice-state">${x.correctedAfterHelp?'✓':x.hadError&&!x.correct?'!':x.correct?'✓':'…'} ${state}</span></div><div class="practice-task-question">${esc(x.q||'Тапсырма мәтіні')}</div><div class="practice-task-meta">${x.hadError?'<span class="meta-warn">Алғашқы жауапта қате</span>':''}${x.helped?'<span class="meta-help">💡 Көмек көрсетілді</span>':''}${x.correctedAfterHelp?'<span class="meta-success">↗ Көмекпен түзетті</span>':''}<span class="meta-attempt">${x.attemptCount||1} әрекет</span></div></article>`;
+  }).join('');
+  return `<section class="practice-run-card"><div class="practice-run-head"><div><span class="run-index">ЖҰМЫС ${runs.length-ri}</span><h5>${esc(run.topic||'Тақырып')}</h5><div class="run-date">${new Date(run.date).toLocaleString('kk-KZ')}</div></div><div class="run-score"><strong>${run.score}/${run.total}</strong><span>${pct}% нәтиже</span></div></div><div class="run-progress"><span style="width:${pct}%"></span></div><div class="run-metrics"><div><b>${wrong}</b><span>Алғашқы қате</span></div><div><b>${helped}</b><span>Көмек берілді</span></div><div><b>${fixed}</b><span>Түзетілді</span></div><div><b>${finished}</b><span>Дұрыс аяқтады</span></div></div><div class="practice-task-list">${taskCards||'<p class="muted">Тапсырма мәліметтері тіркелмеген.</p>'}</div></section>`;
+ }).join(''):'<div class="detail-empty">📘 Әзірге үйрену тапсырмаларының сақталған нәтижесі жоқ.</div>';
+ const allRuns=runs.flatMap(x=>x.answers||[]),totalWrong=allRuns.filter(x=>x.hadError).length,totalHelp=allRuns.filter(x=>x.helped).length,totalFixed=allRuns.filter(x=>x.correctedAfterHelp).length;
+ document.getElementById('studentDetail').innerHTML=`<div class="panel student-detail-panel"><div class="section-head"><div><span class="detail-eyebrow">ОҚУШЫ ПРОФИЛІ</span><h3>${esc(s.name)} · жеке диагностика</h3><p class="muted">${esc(s.cls)}</p></div><button class="plain" onclick="document.getElementById('studentDetail').innerHTML=''">✕ Жабу</button></div><div class="grid detail-diagnostics"><div class="col6"><div class="diagnostic-mini diagnostic-blue"><span>Бастапқы диагностика</span><strong>${a?a.score+'/10':'—'}</strong><b>${a?a.percent+'%':'Орындалмаған'}</b>${a?`<small>${new Date(a.date).toLocaleString('kk-KZ')}</small>${renderErrorSummary(a.answers)}`:''}</div></div><div class="col6"><div class="diagnostic-mini diagnostic-purple"><span>Қайталама диагностика</span><strong>${b?b.score+'/10':'—'}</strong><b>${b?b.percent+'%':'Орындалмаған'}</b>${b?`<small>${new Date(b.date).toLocaleString('kk-KZ')}</small>${renderErrorSummary(b.answers)}`:''}</div></div>${topicCard('16-тақырып: Жай бөлшекті оқу және жазу','16','topic-peach')}${topicCard('17-тақырып: Жай бөлшектің негізгі қасиеті','17','topic-lilac')}<div class="col12"><div class="detail-section-card"><div class="detail-section-heading"><div><span class="detail-eyebrow">АНАЛИТИКА</span><h4>📊 Оқушының қателер картасы</h4></div><span class="detail-section-tag">Қате түрлері</span></div>${chart}</div></div><div class="col12"><div class="detail-section-card"><div class="detail-section-heading"><div><span class="detail-eyebrow">ЖЕКЕ ОҚУ ТАРИХЫ</span><h4>📝 Үйрену тапсырмаларының талдауы</h4><p class="muted smalltext">Әр тапсырмадағы әрекет, көмек және қатені түзету барысы.</p></div></div><div class="practice-summary"><div><b>${runs.length}</b><span>Оқу жұмысы</span></div><div><b>${totalWrong}</b><span>Алғашқы қате</span></div><div><b>${totalHelp}</b><span>Көмек берілді</span></div><div><b>${totalFixed}</b><span>Түзетілді</span></div></div>${runCards}</div></div><div class="col12"><div class="recommendation-card"><span>💡 ЖЕКЕ ҰСЫНЫС</span><p>${recommendation(answers)}</p></div></div></div></div>`;
 }
 function recommendation(answers){const counts={};answers.filter(a=>!a.correct).forEach(a=>counts[a.error]=(counts[a.error]||0)+1);const top=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];if(!top)return 'Диагностикадағы жауаптарда қате тіркелмеген. Білімді бекіту үшін күрделі деңгейдегі тапсырмаларды орындауға болады.';const k=top[0];const tips={numerator:'Алым мен бөлімді ажырататын көрнекі мысалдарды қайталау ұсынылады.',denominator:'Бөлімнің бүтін неше тең бөлікке бөлінгенін көрсететінін қайталау ұсынылады.',reading:'Бөлшекті оқу үлгілерін дауыстап оқып жаттығу ұсынылады.',visual_count:'Суреттегі барлық және боялған бөліктерді бөлек санап жаттығу ұсынылады.',equivalence:'Мәні тең бөлшектерді суретпен салыстыру және бірдей санға көбейту ережесін қайталау ұсынылады.',unequal_multiplier:'Алым мен бөлімге бірдей амал қолдану ережесін қайталау ұсынылады.',simplify:'Бөлшектің алымы мен бөлімін ортақ бөлгішке бөлуге жаттығу ұсынылады.'};return (tips[k]||'Қате кеткен тапсырмаларды қайта қарап, теорияны қайталау ұсынылады.')+' Ең жиі тіркелген ықтимал қате: '+(errorNames[k]||k)+'.'}
 async function refreshTeacherData(){try{await mathAIRefreshTeacher();renderTeacher();renderContentManager();alert('Онлайн деректер жаңартылды.');}catch(e){alert('Деректерді жаңарту мүмкін болмады: '+(e.message||e));}}
