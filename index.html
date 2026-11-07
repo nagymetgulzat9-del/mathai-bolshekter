@@ -232,6 +232,15 @@ th{background:#f4f6fc;color:#53617d;font-weight:800}td,th{border-color:#e9edf5}
 @media(max-width:650px){.app{padding:10px}.topbar{border-radius:17px;gap:10px}.brand h1{font-size:1.12rem}.logo{width:45px;height:45px}.hero{border-radius:20px;padding:22px 18px}.hero:after{right:2%;font-size:112px}.panel,.card{padding:16px;border-radius:17px}.practice-summary{gap:8px}.run-metrics{gap:7px}button{min-height:42px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
+
+/* Оқушыларды белгілеу және басқару */
+.student-manage-toolbar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:13px 14px;margin:12px 0 14px;border:1px solid #e4e8f5;border-radius:16px;background:linear-gradient(135deg,#fafbff,#f3f6ff)}
+.student-manage-toolbar .manage-count{font-size:.84rem;font-weight:750;color:#5d6784;margin-right:auto}
+.student-select-cell{width:42px;text-align:center!important}
+.student-row-check,.student-select-all{width:18px;height:18px;accent-color:#5965e8;cursor:pointer;vertical-align:middle}
+.student-delete-btn{margin-left:6px;background:#fff0f1;color:#b83d50;border-radius:10px;padding:8px 10px;font-size:.76rem;font-weight:800}
+@media(max-width:650px){.student-manage-toolbar{align-items:stretch}.student-manage-toolbar button{flex:1}.student-manage-toolbar .manage-count{width:100%}}
+
 </style>
 </head>
 <body>
@@ -327,7 +336,13 @@ th{background:#f4f6fc;color:#53617d;font-weight:800}td,th{border-color:#e9edf5}
   <div class="admin-pane-heading"><button class="admin-back" onclick="openAdminHome()">← Басқару орталығы</button><span class="admin-section-tag students-tag">02 · ОҚУШЫЛАР</span><h2>👩‍🎓 Оқушылар деректері</h2><p>Оқушылардың оқу жетістіктері мен диагностикасы осы бөлімде.</p></div>
   <section class="student-data-section" aria-label="Оқушылар деректері"><div class="section-head student-data-heading"><div><h3>Оқушылардың оқу көрсеткіштері</h3><p class="muted smalltext">Оқушылардың аты-жөні, оқу нәтижелері, қателері және статистикасы — тек осы бөлімде.</p></div></div>
   <div id="teacherStats" class="grid" style="margin:16px 0"></div>
-  <div class="panel" style="margin-bottom:16px"><div class="section-head"><div><h3>Оқушылар нәтижесі</h3><p class="muted smalltext">Кезеңдерді салыстыру және жеке жұмыстарды ашу.</p></div><div class="row no-print"><input id="teacherSearch" placeholder="Оқушыны іздеу..." oninput="renderTeacher()" style="padding:10px;border:1px solid var(--line);border-radius:12px"><button class="secondary" onclick="refreshTeacherData()">Онлайн деректерді жаңарту</button><button class="secondary" onclick="exportCSV()">CSV жүктеу</button><button class="plain" onclick="window.print()">Есепті басып шығару</button><button class="danger" onclick="clearAllData()">Барлық деректі өшіру</button></div></div><div id="teacherTable" class="table-wrap"></div></div>
+  <div class="panel" style="margin-bottom:16px"><div class="section-head"><div><h3>Оқушылар нәтижесі</h3><p class="muted smalltext">Кезеңдерді салыстыру және жеке жұмыстарды ашу.</p></div><div class="row no-print"><input id="teacherSearch" placeholder="Оқушыны іздеу..." oninput="renderTeacher()" style="padding:10px;border:1px solid var(--line);border-radius:12px"><button class="secondary" onclick="refreshTeacherData()">Онлайн деректерді жаңарту</button><button class="secondary" onclick="exportCSV()">CSV жүктеу</button><button class="plain" onclick="window.print()">Есепті басып шығару</button><button class="danger" onclick="clearAllData()">Барлық деректі өшіру</button></div></div><div class="student-manage-toolbar no-print">
+  <span class="manage-count" id="studentSelectionCount">0 оқушы белгіленді</span>
+  <button class="secondary small" type="button" onclick="selectVisibleStudents(true)">Барлығын белгілеу</button>
+  <button class="plain small" type="button" onclick="selectVisibleStudents(false)">Белгіні алып тастау</button>
+  <button class="danger small" type="button" onclick="deleteSelectedStudents()">🗑 Таңдалғандарды өшіру</button>
+</div>
+<div id="teacherTable" class="table-wrap"></div></div>
   <div class="grid"><div class="col6 panel"><h3>Қателер жиілігі</h3><div id="errorChart"></div></div><div class="col6 panel"><h3>Орташа диагностика нәтижесі</h3><div id="scoreChart"></div></div></div>
   <div id="studentDetail" style="margin-top:16px"></div></section>
   </div>
@@ -734,12 +749,14 @@ function renderTeacherBase(){
   card('🎯','Қайталама диагностика',withB.length,'Білімін қайта тексергендер','kpi-pink')+
   card('🚀','Орташа өсім',(avgGain>0?'+':'')+avgGain+' п.п.','Екі кезеңді тапсырған оқушылар','kpi-mint');
 
- document.getElementById('teacherTable').innerHTML=students.length?`<table class="results-table"><thead><tr><th>№</th><th>Оқушының аты-жөні</th><th>Сыныбы</th><th>1-диагностика</th><th>2-диагностика</th><th>Өзгеріс</th><th>16-тақырып қатесі</th><th>17-тақырып қатесі</th><th>Әрекет</th></tr></thead><tbody>${students.map((s,i)=>{
+ document.getElementById('teacherTable').innerHTML=students.length?`<table class="results-table"><thead><tr><th class="student-select-cell"><input class="student-select-all" type="checkbox" aria-label="Көрінген оқушыларды белгілеу" onchange="selectVisibleStudents(this.checked)"></th><th>№</th><th>Оқушының аты-жөні</th><th>Сыныбы</th><th>1-диагностика</th><th>2-диагностика</th><th>Өзгеріс</th><th>16-тақырып қатесі</th><th>17-тақырып қатесі</th><th>Әрекет</th></tr></thead><tbody>${students.map((s,i)=>{
   const a=s.diagnostics?.initial,b=s.diagnostics?.repeat,diff=a&&b?b.percent-a.percent:null;
   const ea=countTopicErrors(a?.answers||[],'16'),eb=countTopicErrors(a?.answers||[],'17');
   const score=(x,color)=>x?`<span class="score-chip ${color}">${x.score}/10 <b>${x.percent}%</b></span>`:'<span class="status-muted">Орындалмаған</span>';
-  return `<tr><td><span class="row-number">${i+1}</span></td><td><b class="student-name">${esc(s.name)}</b></td><td><span class="class-chip">${esc(s.cls)}</span></td><td>${score(a,'score-blue')}</td><td>${score(b,'score-violet')}</td><td>${diff===null?'<span class="status-muted">—</span>':`<span class="gain-chip ${diff>=0?'gain-up':'gain-down'}">${diff>0?'+':''}${diff} п.п.</span>`}</td><td><span class="error-count count-orange">${ea}</span></td><td><span class="error-count count-pink">${eb}</span></td><td><button class="detail-btn" onclick="showStudentDetail('${encodeURIComponent(Object.keys(db.students).find(k=>db.students[k]===s)||studentKey(s.name,s.cls))}')">Толығырақ ↗</button></td></tr>`;
+  const recordKey=Object.keys(db.students).find(k=>db.students[k]===s)||studentKey(s.name,s.cls);
+  return `<tr><td class="student-select-cell"><input class="student-row-check" type="checkbox" value="${encodeURIComponent(recordKey)}" aria-label="${esc(s.name)} оқушысын белгілеу" onchange="updateStudentSelectionCount()"></td><td><span class="row-number">${i+1}</span></td><td><b class="student-name">${esc(s.name)}</b></td><td><span class="class-chip">${esc(s.cls)}</span></td><td>${score(a,'score-blue')}</td><td>${score(b,'score-violet')}</td><td>${diff===null?'<span class="status-muted">—</span>':`<span class="gain-chip ${diff>=0?'gain-up':'gain-down'}">${diff>0?'+':''}${diff} п.п.</span>`}</td><td><span class="error-count count-orange">${ea}</span></td><td><span class="error-count count-pink">${eb}</span></td><td><button class="detail-btn" onclick="showStudentDetail('${encodeURIComponent(recordKey)}')">Толығырақ ↗</button><button class="student-delete-btn" onclick="deleteOneStudent('${encodeURIComponent(recordKey)}','${esc(s.name).replace(/'/g,'&#39;')}')">Өшіру</button></td></tr>`;
  }).join('')}</tbody></table>`:'<div class="empty">Әзірге оқушы деректері жоқ.</div>';
+ updateStudentSelectionCount();
 
  const errors={};all.forEach(s=>{const a=s.diagnostics?.initial;if(a)a.answers.filter(x=>!x.correct).forEach(x=>errors[x.error]=(errors[x.error]||0)+1)});
  const sorted=Object.entries(errors).sort((a,b)=>b[1]-a[1]).slice(0,6);
@@ -794,6 +811,52 @@ function showStudentDetail(encoded){
  document.getElementById('studentDetail').innerHTML=`<div class="panel student-detail-panel"><div class="section-head"><div><span class="detail-eyebrow">ОҚУШЫ ПРОФИЛІ</span><h3>${esc(s.name)} · жеке диагностика</h3><p class="muted">${esc(s.cls)}</p></div><button class="plain" onclick="document.getElementById('studentDetail').innerHTML=''">✕ Жабу</button></div><div class="grid detail-diagnostics"><div class="col6"><div class="diagnostic-mini diagnostic-blue"><span>Бастапқы диагностика</span><strong>${a?a.score+'/10':'—'}</strong><b>${a?a.percent+'%':'Орындалмаған'}</b>${a?`<small>${new Date(a.date).toLocaleString('kk-KZ')}</small>${renderErrorSummary(a.answers)}`:''}</div></div><div class="col6"><div class="diagnostic-mini diagnostic-purple"><span>Қайталама диагностика</span><strong>${b?b.score+'/10':'—'}</strong><b>${b?b.percent+'%':'Орындалмаған'}</b>${b?`<small>${new Date(b.date).toLocaleString('kk-KZ')}</small>${renderErrorSummary(b.answers)}`:''}</div></div>${topicCard('16-тақырып: Жай бөлшекті оқу және жазу','16','topic-peach')}${topicCard('17-тақырып: Жай бөлшектің негізгі қасиеті','17','topic-lilac')}<div class="col12"><div class="detail-section-card"><div class="detail-section-heading"><div><span class="detail-eyebrow">АНАЛИТИКА</span><h4>📊 Оқушының қателер картасы</h4></div><span class="detail-section-tag">Қате түрлері</span></div>${chart}</div></div><div class="col12"><div class="detail-section-card"><div class="detail-section-heading"><div><span class="detail-eyebrow">ЖЕКЕ ОҚУ ТАРИХЫ</span><h4>📝 Үйрену тапсырмаларының талдауы</h4><p class="muted smalltext">Әр тапсырмадағы әрекет, көмек және қатені түзету барысы.</p></div></div><div class="practice-summary"><div><b>${runs.length}</b><span>Оқу жұмысы</span></div><div><b>${totalWrong}</b><span>Алғашқы қате</span></div><div><b>${totalHelp}</b><span>Көмек берілді</span></div><div><b>${totalFixed}</b><span>Түзетілді</span></div></div>${runCards}</div></div><div class="col12"><div class="recommendation-card"><span>💡 ЖЕКЕ ҰСЫНЫС</span><p>${recommendation(answers)}</p></div></div></div></div>`;
 }
 function recommendation(answers){const counts={};answers.filter(a=>!a.correct).forEach(a=>counts[a.error]=(counts[a.error]||0)+1);const top=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];if(!top)return 'Диагностикадағы жауаптарда қате тіркелмеген. Білімді бекіту үшін күрделі деңгейдегі тапсырмаларды орындауға болады.';const k=top[0];const tips={numerator:'Алым мен бөлімді ажырататын көрнекі мысалдарды қайталау ұсынылады.',denominator:'Бөлімнің бүтін неше тең бөлікке бөлінгенін көрсететінін қайталау ұсынылады.',reading:'Бөлшекті оқу үлгілерін дауыстап оқып жаттығу ұсынылады.',visual_count:'Суреттегі барлық және боялған бөліктерді бөлек санап жаттығу ұсынылады.',equivalence:'Мәні тең бөлшектерді суретпен салыстыру және бірдей санға көбейту ережесін қайталау ұсынылады.',unequal_multiplier:'Алым мен бөлімге бірдей амал қолдану ережесін қайталау ұсынылады.',simplify:'Бөлшектің алымы мен бөлімін ортақ бөлгішке бөлуге жаттығу ұсынылады.'};return (tips[k]||'Қате кеткен тапсырмаларды қайта қарап, теорияны қайталау ұсынылады.')+' Ең жиі тіркелген ықтимал қате: '+(errorNames[k]||k)+'.'}
+
+function selectedStudentBoxes(){return [...document.querySelectorAll('#teacherTable .student-row-check:checked')];}
+function updateStudentSelectionCount(){
+ const n=selectedStudentBoxes().length;
+ const label=document.getElementById('studentSelectionCount');
+ if(label)label.textContent=n+' оқушы белгіленді';
+ const all=[...document.querySelectorAll('#teacherTable .student-row-check')];
+ const master=document.querySelector('#teacherTable .student-select-all');
+ if(master){master.checked=all.length>0&&all.every(x=>x.checked);master.indeterminate=n>0&&n<all.length;}
+}
+function selectVisibleStudents(checked){
+ document.querySelectorAll('#teacherTable .student-row-check').forEach(x=>x.checked=!!checked);
+ updateStudentSelectionCount();
+}
+async function deleteStudentRecords(encodedKeys,names){
+ if(!mathAIAdminDb || !mathAIAdminAuth?.currentUser || mathAIAdminAuth.currentUser.uid!==MATHAI_ADMIN_UID){
+  alert('Оқушыларды өшіру үшін админ аккаунтына қайта кіріңіз.');return;
+ }
+ const keys=[...new Set(encodedKeys.map(x=>decodeURIComponent(x)))];
+ if(!keys.length){alert('Алдымен өшірілетін оқушыны белгілеңіз.');return;}
+ const shown=(names||[]).slice(0,8).join('\n')+(names&&names.length>8?'\n... және тағы '+(names.length-8)+' оқушы':'');
+ const ok=confirm('НАЗАР АУДАРЫҢЫЗ!\n\nТөмендегі оқушы(лар)дың деректері Firebase дерекқорынан біржола өшіріледі:\n\n'+shown+'\n\nБұл әрекетті кері қайтару мүмкін емес. Жалғастырасыз ба?');
+ if(!ok)return;
+ try{
+  const batch=mathAIAdminDb.batch();
+  keys.forEach(k=>batch.delete(mathAIAdminDb.collection('students').doc(k)));
+  await batch.commit();
+  const db=loadDB();db.students=db.students||{};
+  keys.forEach(k=>{delete db.students[k];});
+  saveDB(db);
+  const detail=document.getElementById('studentDetail');if(detail)detail.innerHTML='';
+  await mathAILoadAllStudents();
+  renderTeacher();
+  alert(keys.length+' оқушының дерегі Firebase-тен өшірілді.');
+ }catch(e){
+  console.error('Оқушы деректерін өшіру қатесі:',e);
+  alert('Өшіру орындалмады. Firebase Firestore ережелерінде админге students коллекциясындағы құжаттарды delete етуге рұқсат бар-жоғын тексеріңіз.\n\nҚате: '+(e.message||e));
+ }
+}
+function deleteSelectedStudents(){
+ const boxes=selectedStudentBoxes();
+ const names=boxes.map(b=>b.closest('tr')?.querySelector('.student-name')?.textContent||'Оқушы');
+ deleteStudentRecords(boxes.map(b=>b.value),names);
+}
+function deleteOneStudent(encodedKey,name){deleteStudentRecords([encodedKey],[name]);}
+
 async function refreshTeacherData(){try{await mathAIRefreshTeacher();renderTeacher();renderContentManager();alert('Онлайн деректер жаңартылды.');}catch(e){alert('Деректерді жаңарту мүмкін болмады: '+(e.message||e));}}
 function exportCSV(){const db=loadDB(),rows=[['Оқушы','Сынып','Бастапқы ұпай','Бастапқы %','Қайталама ұпай','Қайталама %','Өзгеріс п.п.','Бастапқы қате 16-тақырып','Бастапқы қате 17-тақырып']];Object.values(db.students).forEach(s=>{const a=s.diagnostics?.initial,b=s.diagnostics?.repeat;rows.push([s.name,s.cls,a?.score??'',a?.percent??'',b?.score??'',b?.percent??'',a&&b?b.percent-a.percent:'',countTopicErrors(a?.answers||[],'16'),countTopicErrors(a?.answers||[],'17')])});const csv='\ufeff'+rows.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(';')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='MathAI_natizheler.csv';a.click();URL.revokeObjectURL(url)}
 function clearAllData(){if(!confirm('Осы браузердегі барлық MathAI оқушы деректерін біржола өшіресіз бе? Алдымен CSV экспорттағаныңызды тексеріңіз.'))return;localStorage.removeItem(DBKEY);document.getElementById('studentDetail').innerHTML='';renderTeacher()}
