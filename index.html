@@ -740,14 +740,14 @@ function renderTeacherBase(){
  const withA=all.filter(s=>s.diagnostics?.initial),withB=all.filter(s=>s.diagnostics?.repeat);
  const avg=arr=>arr.length?Math.round(arr.reduce((n,s)=>n+s.diagnostics.initial.percent,0)/arr.length):0;
  const avgRepeat=withB.length?Math.round(withB.reduce((n,s)=>n+s.diagnostics.repeat.percent,0)/withB.length):0;
- const improvement=withA.filter(s=>s.diagnostics?.repeat).map(s=>s.diagnostics.repeat.percent-s.diagnostics.initial.percent);
- const avgGain=improvement.length?Math.round(improvement.reduce((a,b)=>a+b,0)/improvement.length):0;
+ // Жалпы өсім: бастапқы диагностиканың орташа нәтижесі мен қайталама диагностиканың орташа нәтижесінің айырмасы.
+ const avgGain=avgRepeat-avg(withA);
  const card=(icon,label,value,sub,cls)=>`<div class="col3"><div class="dash-kpi ${cls}"><div class="kpi-top"><span class="kpi-icon">${icon}</span><span class="kpi-label">${label}</span></div><div class="kpi-value">${value}</div><div class="kpi-sub">${sub}</div><div class="kpi-orb"></div></div></div>`;
  document.getElementById('teacherStats').innerHTML=
   card('👩‍🎓','Тіркелген оқушы',all.length,'Платформадағы барлық оқушы','kpi-violet')+
   card('📝','Бастапқы диагностика',withA.length,`Қамтылуы: ${all.length?Math.round(withA.length/all.length*100):0}%`,'kpi-blue')+
   card('🎯','Қайталама диагностика',withB.length,'Білімін қайта тексергендер','kpi-pink')+
-  card('🚀','Орташа өсім',(avgGain>0?'+':'')+avgGain+' п.п.','Екі кезеңді тапсырған оқушылар','kpi-mint');
+  card('🚀','Орташа өсім',(avgGain>0?'+':'')+avgGain+' п.п.','2 диагностиканың орташа нәтижелерінің айырмасы','kpi-mint');
 
  document.getElementById('teacherTable').innerHTML=students.length?`<table class="results-table"><thead><tr><th class="student-select-cell"><input class="student-select-all" type="checkbox" aria-label="Көрінген оқушыларды белгілеу" onchange="selectVisibleStudents(this.checked)"></th><th>№</th><th>Оқушының аты-жөні</th><th>Сыныбы</th><th>1-диагностика</th><th>2-диагностика</th><th>Өзгеріс</th><th>16-тақырып қатесі</th><th>17-тақырып қатесі</th><th>Әрекет</th></tr></thead><tbody>${students.map((s,i)=>{
   const a=s.diagnostics?.initial,b=s.diagnostics?.repeat,diff=a&&b?b.percent-a.percent:null;
